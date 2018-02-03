@@ -17,36 +17,13 @@ ifeq (pa_angler,$(TARGET_PRODUCT))
 # We have our own power HAL
 TARGET_USES_DEVICE_SPECIFIC_POWERHAL := true
 
-AUDIO_FEATURE_ENABLED_MULTI_VOICE_SESSIONS := true
-AUDIO_FEATURE_ENABLED_DSM_FEEDBACK := true
+# We use the device sepolicy
+TARGET_EXCLUDE_QCOM_SEPOLICY := true
 
 $(call inherit-product, device/huawei/angler/aosp_angler.mk)
 
 # Generic CAF packages
 include device/qcom/common/common.mk
-
-# CAF display addons
-PRODUCT_PACKAGES += \
-    copybit.msm8994
-
-# MSM8994 Display HAL settings
-PRODUCT_PROPERTY_OVERRIDES += \
-    debug.composition.type=c2d \
-    debug.sf.hw=1 \
-    persist.debug.wfd.enable=1 \
-    persist.demo.hdmirotationlock=false \
-    persist.hwc.enable_vds=1 \
-    persist.hwc.mdpcomp.enable=true \
-    persist.hwc.ptor.enable=true \
-    persist.mdpcomp.4k2kSplit=1 \
-    persist.hwc.mdpcomp.maxpermixer=5 \
-    persist.mdpcomp_perfhint=50 \
-    persist.metadata_dynfps.disable=true \
-    persist.sys.wfd.virtual=0
-
-# ROI (region of interest) is miscalculated right now
-PRODUCT_PROPERTY_OVERRIDES += \
-    persist.mdp.partialUpdate=false
 
 # Get the defaults going.
 TARGET_BOOT_ANIMATION_RES := 1440
@@ -61,8 +38,8 @@ PRODUCT_RESTRICT_VENDOR_FILES := false
 
 PRODUCT_BUILD_PROP_OVERRIDES += \
     PRODUCT_NAME=angler \
-    BUILD_FINGERPRINT=google/angler/angler:7.1.2/N2G48C/4104010:user/release-keys \
-    PRIVATE_BUILD_DESC="angler-user 7.1.2 N2G48C 4104010 release-keys"
+    BUILD_FINGERPRINT=google/angler/angler:8.1.0/OPM3.171019.013/4499252:user/release-keys \
+    PRIVATE_BUILD_DESC="angler-user 8.1.0 OPM3.171019.013 4499252 release-keys"
 
 # Paranoid Android platform
 include vendor/pa/main.mk
